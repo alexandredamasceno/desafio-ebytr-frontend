@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import ContextTasks from '../context/tasksContext';
 
 function AddTask() {
     const [task, setTask] = useState({
        task: '',
        status: 'Pendente', 
     });
+    const { getTasks } = useContext(ContextTasks);
 
     const setInputs = ({ target }) => {
         setTask({ ...task, [target.name]: target.value });
@@ -21,6 +23,7 @@ function AddTask() {
             })
         };
         fetch(url, header)
+            .then(() => getTasks())
             .catch((err) => console.log('Erro aqui', err));
 
         // setTask({ ...task, task: '' });
@@ -51,7 +54,7 @@ function AddTask() {
                         </select>
                     {/* </label> */}
                     <br></br>
-                    <button type="button" onClick={ () => submitInputs }>Adicionar</button>
+                    <button type="button" onClick={ () => submitInputs() }>Adicionar</button>
                 </form>
             </div>
         </div>

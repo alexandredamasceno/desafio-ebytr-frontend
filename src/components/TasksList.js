@@ -3,20 +3,8 @@ import ContextTasks from '../context/tasksContext';
 import AddTask from './AddTask';
 
 function TasksList() {
-    // const [showAddList, setShowAddList] = useState(false);
     const { tasks, setTasks, showAddList, setShowAddList } = useContext(ContextTasks);
-    // const [tasks, setTasks] = useState([]);
-    
-    useEffect(() => {
-        const getTasks = () => {
-            const url = 'http://localhost:3001/tasks'
-            fetch(url)
-                .then((response) => response.json())
-                .then((response) => setTasks(response))
-                .catch((err) => console.log("O erro aqui:", err));
-        }
-        getTasks();
-    }, []);
+
     return (
         <div>
             <header>
