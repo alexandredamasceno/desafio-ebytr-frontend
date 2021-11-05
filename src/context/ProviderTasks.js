@@ -5,6 +5,10 @@ import TasksContext from './tasksContext';
 function ProviderTasks({ children }) {
     const [tasks, setTasks] = useState([]);
     const [showAddList, setShowAddList] = useState(false);
+  //   const [task, setTask] = useState({
+  //     task: '',
+  //     status: 'Pendente', 
+  //  });
     
     const getTasks = () => {
         const url = 'http://localhost:3001/tasks'
@@ -31,7 +35,26 @@ function ProviderTasks({ children }) {
           .then(() => getTasks())
           .catch((err) => console.log('Erro aqui', err));
   };
-  
+
+//   const updateTask = (id, task, status) => {
+//     const url = `http://localhost:3001/tasks/${id}`;
+//     const data = {
+//       task,
+//       status,
+//     }
+//     const header = {
+//         method: 'PUT',
+//         body: JSON.stringify(data),
+//         headers: new Headers({
+//             'Content-Type': 'application/json',
+//             'Accept': 'application/json',
+//         })
+//     };
+//     fetch(url, header)
+//         .then(() => getTasks())
+//         .catch((err) => console.log('Erro aqui', err));
+// };
+
   return (
     <TasksContext.Provider value={ { deleteTask, getTasks, tasks, setTasks, showAddList, setShowAddList } }>
       { children }

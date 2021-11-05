@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import ContextTasks from '../context/tasksContext';
 
-function UpdateTask() {
+function UpdateTask({ id }) {
     const [task, setTask] = useState({
         task: '',
         status: 'Pendente', 
      });
+
+     const { getTasks } = useContext(ContextTasks);
  
      const setInputs = ({ target }) => {
          setTask({ ...task, [target.name]: target.value });
      };
  
      const submitInputs = () => {
-         const url = 'http://localhost:3001/tasks';
+         const url = `http://localhost:3001/tasks/${id}`;
          const header = {
              method: 'PUT',
              body: JSON.stringify(task),
@@ -21,13 +24,11 @@ function UpdateTask() {
              })
          };
          fetch(url, header)
+             .then(() => getTasks())
              .catch((err) => console.log('Erro aqui', err));
      };
     return (
         <div>
-            <header>
-                <h2>Atualizar tarefa</h2>
-            </header>
             <div>
                 <form>
                     <input
@@ -49,7 +50,7 @@ function UpdateTask() {
                         </select>
                     {/* </label> */}
                     <br></br>
-                    <button type="button" onClick={ submitInputs }>Adicionar</button>
+                    <button type="button" onClick={ submitInputs }>Atualizar</button>
                 </form>
             </div>
         </div>
