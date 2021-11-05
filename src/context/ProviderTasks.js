@@ -16,8 +16,24 @@ function ProviderTasks({ children }) {
     useEffect(() => {
         getTasks();
     }, []);
+
+    const deleteTask = (id) => {
+      const url = `http://localhost:3001/tasks/${id}`;
+      const header = {
+          method: 'DELETE',
+          body: '',
+          headers: new Headers({
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+          })
+      };
+      fetch(url, header)
+          .then(() => getTasks())
+          .catch((err) => console.log('Erro aqui', err));
+  };
+  
   return (
-    <TasksContext.Provider value={ { getTasks, tasks, setTasks, showAddList, setShowAddList } }>
+    <TasksContext.Provider value={ { deleteTask, getTasks, tasks, setTasks, showAddList, setShowAddList } }>
       { children }
     </TasksContext.Provider>
   );
