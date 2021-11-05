@@ -22,6 +22,8 @@ function AddTask() {
         };
         fetch(url, header)
             .catch((err) => console.log('Erro aqui', err));
+
+        // setTask({ ...task, task: '' });
     };
     return (
         <div>
@@ -49,7 +51,7 @@ function AddTask() {
                         </select>
                     {/* </label> */}
                     <br></br>
-                    <button type="button" onClick={ submitInputs }>Adicionar</button>
+                    <button type="button" onClick={ () => submitInputs }>Adicionar</button>
                 </form>
             </div>
         </div>
