@@ -30,9 +30,6 @@ function AddTask() {
     };
     return (
         <div>
-            <header>
-                <h2>Adiconar nova tarefa</h2>
-            </header>
             <div>
                 <form>
                     <input

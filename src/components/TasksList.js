@@ -3,7 +3,8 @@ import ContextTasks from '../context/tasksContext';
 import AddTask from './AddTask';
 
 function TasksList() {
-    const { tasks, showAddList, setShowAddList, deleteTask } = useContext(ContextTasks);
+    const [showAddList, setShowAddList] = useState(false);
+    const { tasks, deleteTask } = useContext(ContextTasks);
 
     const convertDate = (date) => {
         const data = new Date(date);
@@ -15,8 +16,8 @@ function TasksList() {
             <header>
                 <h1>Tarefas</h1>
             </header>
-            {/* <button type="button" onClick={ setShowAddList(!showAddList) }>Adicionar tarefa</button> */}
-            {/* { showAddList && <AddTask /> } */}
+            <button onClick={ () => setShowAddList(!showAddList) }>Adicionar tarefa</button>
+            { showAddList && <AddTask /> }
             <div>
                 <ul>
                     { tasks.map(({ _id, task, status, createdAt }, i) => (
@@ -27,7 +28,7 @@ function TasksList() {
                     )) }
                 </ul>
             </div>
-            <AddTask />
+            {/* <AddTask /> */}
         </div>
     );
 };
